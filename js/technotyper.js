@@ -98,7 +98,7 @@
         self.properties.$text.text('');
     };
 
-    TechnoTyper.prototype.version = '3.0.0';
+    TechnoTyper.prototype.version = '1.0.0';
     TechnoTyper.prototype.default_settings = {
         container:false,
         type_interval:50,
