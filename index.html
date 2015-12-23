@@ -7,27 +7,89 @@
         body {
             background:#000;
             color:#fff;
+            font-family:Arial,Helvetica,sans-serif;
         }
         .typer {
-            padding:2em;
-            font-family:Arial,Helvetica,sans-serif;
+            margin:5rem;
             font-weight:bold;
             font-size:300%;
             text-align:left;
+        }
+
+        .controller {
+            display:block;
+            margin:5rem;
+            position:absolute;
+            font-size:150%;
+            left:0;
+            bottom:0;
+        }
+
+        .start-typer, .stop-typer, .reset-typer {
+            display:inline-block;
+            padding:0.5em 1em;
+            color:#000;
+            background:#fff;
+            text-decoration:none;
+            margin:0 1em 0 0;
+        }
+
+        .input-value {
+            border: none;
+            border-bottom: 2px solid #fff;
+            background: #000;
+            padding: 0.5em 1em;
+            color: #fff;
+            font-size:100%;
+            width:500px;
+        }
+
+        input:focus {
+            outline:none;
         }
     </style>
 </head>
 <body>
 <div class="typer"></div>
+<div class="controller">
+    <a href="#" class="start-typer">Start</a>
+    <a href="#" class="stop-typer">Stop</a>
+    <a href="#" class="reset-typer">Reset</a>
+    <input type="text" value="Accomplish Anything" class="input-value" />
+</div>
 <script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/technotyper.js"></script>
 <script type="text/javascript">
     (function(){
         var technotyper = new $.TechnoTyper({
-            container:$('.typer')
+            container:$('.typer'),
+            type_interval:50,
+            type_delay:1200,
+            cursor_interval:250,
+            cursor:'_',
+            text:''
         });
-        technotyper.setText('Accomplish Anything');
-        technotyper.start();
+
+        technotyper.setText($('.input-value').val());
+
+        $('.start-typer').on('click',function(e){
+            e.preventDefault();
+            technotyper.start(0);
+        });
+
+        $('.stop-typer').on('click',function(e){
+            e.preventDefault();
+            technotyper.stop();
+        });
+
+        $('.reset-typer').on('click',function(e){
+            e.preventDefault();
+            technotyper.reset();
+        });
+
+        $('.input-value').on('input',function(){
+            technotyper.setText($(this).val());
+        });
     })();
 </script>
 </body>
